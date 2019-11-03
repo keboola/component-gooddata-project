@@ -1,0 +1,35 @@
+{
+  "storage": {
+    "input": {
+      "files": [],
+      "tables": [
+        {
+          "source": "in.c-test.test",
+          "destination": "test.csv",
+          "limit": 50,
+          "columns": [],
+          "where_values": [],
+          "where_operator": "eq"
+        }
+      ]
+    },
+    "output": {
+      "files": [],
+      "tables": []
+    }
+  },
+  "parameters": {
+    "#api_token": "demo",
+    "period_from": "yesterday",
+    "endpoints": [
+      "deals",
+      "companies"
+    ],
+    "company_properties": "",
+    "deal_properties": "",
+    "debug": true
+  },
+  "image_parameters": {
+    "gooddataUrl": "https://keboola.eu.gooddata.com"
+  }
+}

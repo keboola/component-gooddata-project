@@ -1,0 +1,37 @@
+{
+  "title": "Parameters",
+  "type": "object",
+  "required": [
+    "username",
+    "#password",
+    "projectId",
+    "customDomain"
+  ],
+  "properties": {
+    "username": {
+      "type": "string",
+      "title": "Login",
+      "description": "The email address used to log in to GoodData. Must have <strong>admin</strong> privileges.",
+      "propertyOrder": 100
+    },
+    "#password": {
+      "type": "string",
+      "format": "password",
+      "propertyOrder": 200,
+      "title": "Password",
+      "description": "Password associated with the login."
+    },
+    "projectId": {
+      "type": "string",
+      "title": "Project ID",
+      "description": "GoodData project ID.",
+      "propertyOrder": 300
+    },
+    "customDomain": {
+      "type": "string",
+      "title": "Custom domain",
+      "description": "If project is white-labeled, specify the custom domain in format <i>https://domain.gooddata.com</i>.</br>Defaults for regions: <ul><li>US, AP - <i>https://secure.gooddata.com/</i>,</li><li>EU - <i>https://keboola.eu.gooddata.com/</i>.</li>",
+      "propertyOrder": 500
+    }
+  }
+}

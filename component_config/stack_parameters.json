@@ -1,0 +1,11 @@
+{
+    "connection.keboola.com": {
+      "gooddataUrl": "https://secure.gooddata.com"
+    },
+    "connection.eu-central-1.keboola.com": {
+      "gooddataUrl": "https://keboola.eu.gooddata.com"
+    },
+    "connection.ap-southeast-2.keboola.com": {
+      "gooddataUrl": "https://secure.gooddata.com"
+    }
+  }
