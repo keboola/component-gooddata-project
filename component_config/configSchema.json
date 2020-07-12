@@ -5,7 +5,9 @@
     "username",
     "#password",
     "projectId",
-    "customDomain"
+    "customDomain",
+"objects",
+"objects_details"
   ],
   "properties": {
     "username": {
@@ -32,6 +34,129 @@
       "title": "Custom domain",
       "description": "If project is white-labeled, specify the custom domain in format <i>https://domain.gooddata.com</i>.</br>Defaults for regions: <ul><li>US, AP - <i>https://secure.gooddata.com/</i>,</li><li>EU - <i>https://keboola.eu.gooddata.com/</i>.</li>",
       "propertyOrder": 500
+    },
+    "objects": {
+      "title": "Objects",
+      "type": "object",
+      "description": "Objects, which will be downloaded from the project.",
+      "required": [
+        "users",
+        "attributes",
+        "datasets",
+        "facts",
+        "folders",
+        "metrics",
+        "projectdashboards",
+        "reports",
+        "tables"
+      ],
+      "properties": {
+        "users": {
+          "title": "Get Users",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 100
+        },
+        "attributes": {
+          "title": "Get Attributes",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 200
+        },
+        "datasets": {
+          "title": "Get Datasets",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 300
+        },
+        "facts": {
+          "title": "Get Facts",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 400
+        },
+        "folders": {
+          "title": "Get Folders",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 500
+        },
+        "metrics": {
+          "title": "Get Metrics",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 600
+        },
+        "projectdashboards": {
+          "title": "Get Project Dashboards",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 700
+        },
+        "reports": {
+          "title": "Get Reports",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 800
+        },
+        "tables": {
+          "title": "Get Tables",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 900
+        }
+      }
+    },
+    "objects_details": {
+      "title": "Objects details",
+      "type": "object",
+      "description": "Objects, for which detailed metadata will be downloaded.",
+      "required": [
+        "attributes",
+        "datasets",
+        "facts",
+        "folders",
+        "metrics",
+        "tables"
+      ],
+      "properties": {
+        "attributes": {
+          "title": "Get Attributes",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 200
+        },
+        "datasets": {
+          "title": "Get Datasets",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 300
+        },
+        "facts": {
+          "title": "Get Facts",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 400
+        },
+        "folders": {
+          "title": "Get Folders",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 500
+        },
+        "metrics": {
+          "title": "Get Metrics",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 600
+        },
+        "tables": {
+          "title": "Get Tables",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 900
+        }
+      }      
     }
   }
 }
