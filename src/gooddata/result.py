@@ -5,7 +5,7 @@ import json
 FIELDS_METADATA = ['identifier', 'link', 'locked', 'author', 'tags', 'created', 'updated', 'deprecated', 'summary',
                    'isProduction', 'title', 'category', 'unlisted', 'contributor']
 FIELDS_R_METADATA = ['identifier', 'uri', 'locked', 'author', 'tags', 'created', 'updated', 'deprecated', 'summary',
-                     'is_production', 'title', 'category', 'unlisted', 'updated', 'contributor']
+                     'is_production', 'title', 'category', 'unlisted', 'contributor']
 PK_METADATA = ['identifier', 'uri']
 DONOTFLATTEN_METADATA = []
 FORCETYPE_METADATA = []
