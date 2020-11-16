@@ -6,8 +6,8 @@
     "#password",
     "projectId",
     "customDomain",
-"objects",
-"objects_details"
+    "objects",
+    "objects_details"
   ],
   "properties": {
     "username": {
@@ -110,13 +110,14 @@
     "objects_details": {
       "title": "Objects details",
       "type": "object",
-      "description": "Objects, for which detailed metadata will be downloaded.",
+      "description": "Objects, for which detailed metadata will be downloaded. In order for detailed metadata to be downloaded, the object needs to be enabled in the section above as well.</br>E.g. if you'd like to download details about project dashboards, you need to enabled option \"Get Project Dashboards\" in both <i>Objects</i> and <i>Objects Details</i> sections.",
       "required": [
         "attributes",
         "datasets",
         "facts",
         "folders",
         "metrics",
+        "projectdashboards",
         "tables"
       ],
       "properties": {
@@ -150,13 +151,19 @@
           "format": "checkbox",
           "propertyOrder": 600
         },
+        "projectdashboards": {
+          "title": "Get Project Dashboards",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 700
+        },
         "tables": {
           "title": "Get Tables",
           "type": "boolean",
           "format": "checkbox",
           "propertyOrder": 900
         }
-      }      
+      }
     }
   }
 }

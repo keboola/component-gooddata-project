@@ -21,7 +21,7 @@ KEY_DEBUG = 'debug'
 MANDATORY_PARAMETERS = [KEY_USERNAME, KEY_PASSWORD, KEY_PROJECTID, KEY_OBJECTS]
 QUERY_OBJECTS = ["attributes", "datasets", "facts", "folders", "metrics", "projectdashboards", "reports", "tables"]
 
-APP_VERSION = '0.1.0'
+APP_VERSION = '0.1.2'
 
 
 class Writers:
