@@ -136,3 +136,4 @@ class GoodDataProjectClient(HttpClientBase):
 
         else:
             logging.error(f"Could not download details for object {object_url}. Received: {sc_object} - {js_object}.")
+            sys.exit(1)
