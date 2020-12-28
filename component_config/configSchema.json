@@ -104,6 +104,13 @@
           "type": "boolean",
           "format": "checkbox",
           "propertyOrder": 900
+        },
+        "usergroups": {
+          "title": "Get User Groups and Members",
+          "description": "Downloads information about project user groups and members.",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 1000
         }
       }
     },

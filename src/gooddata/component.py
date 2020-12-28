@@ -88,6 +88,31 @@ class GoodDataProjectComponent(KBCEnvHandler):
                 _all_users = [x['user'] for x in self.client.getAllUsers()]
                 _wrt.writerows(_all_users)
 
+            if obj == 'usergroups':
+                logging.info("Downloading info about user groups.")
+
+                _wrt = GoodDataWriter(self.tables_out_path, 'usergroups', False)
+                _all_usergroups = self.client.getUserGroups(self.param_project_id)
+
+                ug_prep = [ug['userGroup'] for ug in _all_usergroups]
+
+                for ug in ug_prep:
+                    ug['project_id'] = ug['content']['project'].split('/')[-1]
+                _wrt.writerows(ug_prep)
+
+                _ug_ids = [ug['userGroup']['content']['id'] for ug in _all_usergroups]
+                _wrt_members = GoodDataWriter(self.tables_out_path, 'usergroups-members', False)
+
+                for ug in _ug_ids:
+                    _ug_members = self.client.getUserGroupMembers(ug)
+                    mem_prep = [u['user'] for u in _ug_members]
+
+                    for mem in mem_prep:
+                        mem['user_id'] = mem['links']['self'].split('/')[-1]
+                        mem['usergroup_id'] = ug
+
+                    _wrt_members.writerows(mem_prep)
+
             elif obj in QUERY_OBJECTS:
                 logging.info(f"Downloading metadata for object type {obj}")
 

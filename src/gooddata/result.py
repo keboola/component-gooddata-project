@@ -25,6 +25,19 @@ PK_DETAIL = ['identifier', 'uri']
 DONOTFLATTEN_DETAIL = ['detail']
 FORCETYPE_DETAIL = []
 
+FIELDS_USERGROUPS = ['content_id', 'content_name', 'content_description', 'content_domain', 'project_id',
+                     'meta_created', 'meta_updated']
+FIELDS_R_USERGROUPS = ['id', 'name', 'description', 'domain', 'project_id', 'created', 'updated']
+PK_USERGROUPS = ['id']
+DONOTFLATTEN_USERGROUPS = []
+FORCETYPE_USERGROUPS = []
+
+FIELDS_USERGROUPS_MEMBERS = ['user_id', 'usergroup_id', 'content_firstName', 'content_lastName']
+FIELDS_R_USERGROUPS_MEMBERS = ['user_id', 'usergroup_id', 'firstname', 'lastname']
+PK_USERGROUPS_MEMBERS = ['user_id', 'usergroup_id']
+DONOTFLATTEN_USERGROUPS_MEMBERS = []
+FORCETYPE_USERGROUPS_MEMBERS = []
+
 
 class GoodDataWriter:
 

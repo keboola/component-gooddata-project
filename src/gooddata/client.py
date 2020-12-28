@@ -137,3 +137,64 @@ class GoodDataProjectClient(HttpClientBase):
         else:
             logging.error(f"Could not download details for object {object_url}. Received: {sc_object} - {js_object}.")
             sys.exit(1)
+
+    def getUserGroups(self, project_id):
+
+        usergroups = []
+        is_complete = False
+        offset = 0
+        limit = 1000
+
+        url_usergroups = urljoin(self.base_url, 'gdc/userGroups')
+
+        while is_complete is False:
+            par_usergroups = {'project': project_id, 'limit': limit, 'offset': offset}
+            rsp_object = self.get_raw(url=url_usergroups, params=par_usergroups)
+
+            sc_usergroups, js_usergroups = rsp_object.status_code, rsp_object.json()
+
+            if sc_usergroups == 200:
+                _items = js_usergroups['userGroups']['items']
+                usergroups += _items
+
+                if len(_items) < limit:
+                    is_complete = True
+                else:
+                    offset += limit
+
+            else:
+                logging.error(f"Could not download user groups. Received: {sc_usergroups} - {js_usergroups}.")
+                sys.exit(1)
+
+        return usergroups
+
+    def getUserGroupMembers(self, usergroup_id):
+
+        members = []
+        limit = 1000
+        offset = 0
+        is_complete = False
+
+        url_members = urljoin(self.base_url, f'gdc/userGroups/{usergroup_id}/members')
+
+        while is_complete is False:
+            par_members = {'limit': limit, 'offset': offset}
+            rsp_members = self.get_raw(url=url_members, params=par_members)
+
+            sc_members, js_members = rsp_members.status_code, rsp_members.json()
+
+            if sc_members == 200:
+                _items = js_members['userGroupMembers']['items']
+                members += _items
+
+                if len(_items) < limit:
+                    is_complete = True
+
+                else:
+                    offset += limit
+
+            else:
+                logging.error(f"Could not download user group members. Received: {sc_members} - {js_members}.")
+                sys.exit(1)
+
+        return members
