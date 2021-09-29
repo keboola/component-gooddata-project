@@ -19,9 +19,9 @@ KEY_GDURL = 'gooddataUrl'
 KEY_DEBUG = 'debug'
 
 MANDATORY_PARAMETERS = [KEY_USERNAME, KEY_PASSWORD, KEY_PROJECTID, KEY_OBJECTS]
-QUERY_OBJECTS = ["attributes", "datasets", "facts", "folders", "metrics", "projectdashboards", "reports", "tables"]
+QUERY_OBJECTS = ["attributes", "datasets", "facts", "folders", "metrics", "projectdashboards", "tables", "reports"]
 
-APP_VERSION = '0.1.2'
+APP_VERSION = '0.2.0'
 
 
 class Writers:
@@ -43,7 +43,7 @@ class GoodDataProjectComponent(KBCEnvHandler):
         self.param_objects = self.cfg_params[KEY_OBJECTS]
         self.param_objects_details = self.cfg_params.get(KEY_OBJECTS_DETAILS, {})
         self.param_custom_domain = self.cfg_params.get(KEY_CUSTOMDOMAIN, '')
-        self.param_gooddata_url = self.image_params[KEY_GDURL]
+        self.param_gooddata_url = self.image_params.get(KEY_GDURL, '')
 
         if self.cfg_params.get('debug', False) is True:
             logger = logging.getLogger()
@@ -72,6 +72,10 @@ class GoodDataProjectComponent(KBCEnvHandler):
             else:
                 self.param_gooddata_url = custDomain
 
+        elif custDomain == '' and self.param_gooddata_url == '':
+            logging.error("Custom domain must be provided.")
+            sys.exit(1)
+
         logging.info(f"Using domain {self.param_gooddata_url}.")
 
     def downloadAllData(self):
@@ -81,15 +85,15 @@ class GoodDataProjectComponent(KBCEnvHandler):
             if value is False:
                 continue
 
+            logging.info(f"Downloading metadata for object type {obj}.")
+
             if obj == 'users':
-                logging.info("Downloading data about users.")
 
                 _wrt = GoodDataWriter(self.tables_out_path, 'users', False)
                 _all_users = [x['user'] for x in self.client.getAllUsers()]
                 _wrt.writerows(_all_users)
 
-            if obj == 'usergroups':
-                logging.info("Downloading info about user groups.")
+            elif obj == 'usergroups':
 
                 _wrt = GoodDataWriter(self.tables_out_path, 'usergroups', False)
                 _all_usergroups = self.client.getUserGroups(self.param_project_id)
@@ -114,7 +118,6 @@ class GoodDataProjectComponent(KBCEnvHandler):
                     _wrt_members.writerows(mem_prep)
 
             elif obj in QUERY_OBJECTS:
-                logging.info(f"Downloading metadata for object type {obj}")
 
                 _wrt = GoodDataWriter(self.tables_out_path, obj, False, result_type='md')
                 _all_objects = self.client.queryObjects(obj)
@@ -125,10 +128,21 @@ class GoodDataProjectComponent(KBCEnvHandler):
 
                     _wrt_detail = GoodDataWriter(self.tables_out_path, str(obj) + '_details', False, 'detail')
                     details = []
+
                     for md in _all_objects:
                         link = md['link']
                         idf = md['identifier']
-                        _detail = self.client.getObjectDetail(link)
+
+                        if obj == 'reports':
+                            _definitions = self.client.getObjectDetail(link)
+                            try:
+                                _latest_definition = _definitions['report']['content']['definitions'][-1]
+                            except IndexError:
+                                continue
+
+                            _detail = self.client.getObjectDetail(_latest_definition)
+                        else:
+                            _detail = self.client.getObjectDetail(link)
                         details += [{'link': link, 'identifier': idf, 'type': obj, 'detail': _detail}]
 
                     _wrt_detail.writerows(details)

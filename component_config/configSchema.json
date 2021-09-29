@@ -126,7 +126,8 @@
         "folders",
         "metrics",
         "projectdashboards",
-        "tables"
+        "tables",
+        "reports"
       ],
       "properties": {
         "attributes": {
@@ -164,6 +165,12 @@
           "type": "boolean",
           "format": "checkbox",
           "propertyOrder": 700
+        },
+        "reports": {
+          "title": "Get Reports",
+          "type": "boolean",
+          "format": "checkbox",
+          "propertyOrder": 800
         },
         "tables": {
           "title": "Get Tables",

@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 .vscode
 .DS_Store
+.python-version
 
 # kbc datafolder
 data/

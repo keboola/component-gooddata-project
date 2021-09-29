@@ -19,15 +19,32 @@
     }
   },
   "parameters": {
-    "#api_token": "demo",
-    "period_from": "yesterday",
-    "endpoints": [
-      "deals",
-      "companies"
-    ],
-    "company_properties": "",
-    "deal_properties": "",
-    "debug": true
+    "objects": {
+      "metrics": true,
+      "folders": false,
+      "tables": false,
+      "facts": false,
+      "users": false,
+      "attributes": false,
+      "projectdashboards": false,
+      "datasets": false,
+      "usergroups": false,
+      "reports": true
+    },
+    "username": "<email>",
+    "#password": "<password>",
+    "projectId": "<pid>",
+    "customDomain": "<custom_domain>",
+    "objects_details": {
+      "facts": false,
+      "tables": false,
+      "folders": false,
+      "metrics": true,
+      "datasets": false,
+      "attributes": false,
+      "projectdashboards": false,
+      "reports": true
+    }
   },
   "image_parameters": {
     "gooddataUrl": "https://keboola.eu.gooddata.com"
